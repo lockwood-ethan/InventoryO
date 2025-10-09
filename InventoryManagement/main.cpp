@@ -1,6 +1,17 @@
 #include <iostream>
+#include <stdio.h>
+#include <sqlite3.h>
+#include "sqlite_database.h"
 
 int main() {
+	// Create database for storing inventory items
+	const char* dir = "C:\\Users\\lockw\\source\\repos\\InventoryManagement\\InventoryManagement\\INVENTORY.db";
+	sqlite3* DB;
+
+	createDB(dir);
+	createTable(dir);
+
+	// Main UI
 	int choice;
 
 	std::cout << "*****     Inventory Management System     *****" << std::endl;
