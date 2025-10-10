@@ -110,11 +110,16 @@ int deleteData(const char* s, int id) {
 }
 
 int callback(void* NotUsed, int argc, char** argv, char** azColName) {
+	std::cout << '|';
 	for (int i = 0; i < argc; i++) {
-		std::cout << azColName[i] << ": " << argv[i] << std::endl;
+		int subtractSpaces1 = strlen(argv[i]) / 2;
+		double subtractSpaces2 = strlen(argv[i]) / 2.0;
+		subtractSpaces2 = ceil(subtractSpaces2);
+		std::cout << std::string(10 - subtractSpaces1, ' ') + argv[i] + std::string(10 - subtractSpaces2, ' ');
 	}
-
+	std::cout << '|';
 	std::cout << std::endl;
+	std::cout << "------------------------------------------------------------------------------------------------------" << std::endl;
 
 	return 0;
 }

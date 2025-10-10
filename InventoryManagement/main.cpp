@@ -23,6 +23,7 @@ int main() {
 	std::cout << "*****     Inventory Management System     *****" << std::endl;
 loop_label:
 	std::cout << std::endl;
+	std::cin.clear();
 	do {
 		std::cout << "1. Display inventory" << std::endl;
 		std::cout << "2. Add a new item to inventory" << std::endl;
@@ -40,6 +41,9 @@ loop_label:
 	// Create, Read, Update, Delete inventory items
 	switch (choice) {
 	case 1:
+		std::cout << "------------------------------------------------------------------------------------------------------" << std::endl;
+		std::cout << "|          ID               Name               Quantity          Manufacturer           Type         |" << std::endl;
+		std::cout << "------------------------------------------------------------------------------------------------------" << std::endl;
 		selectData(dir);
 		goto loop_label;
 	case 2:
