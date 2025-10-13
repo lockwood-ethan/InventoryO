@@ -3,10 +3,18 @@
 #include <sqlite3.h>
 #include <string>
 #include "sqlite_database.h"
+#include "InventoryItem.h"
+
+const int DISPLAY = 1;
+const int ADD_ITEM = 2;
+const int UPDATE_ITEM = 3;
+const int DELETE_ITEM = 4;
+const int QUIT = 5;
+
 
 int main() {
 	// Create database for storing inventory items
-	const char* dir = "C:\\Users\\lockw\\source\\repos\\InventoryManagement\\InventoryManagement\\INVENTORY.db";
+	const char* dir = ".\\INVENTORY.db";
 	sqlite3* DB;
 
 	createDB(dir);
@@ -40,13 +48,13 @@ loop_label:
 
 	// Create, Read, Update, Delete inventory items
 	switch (choice) {
-	case 1:
+	case DISPLAY:
 		std::cout << "------------------------------------------------------------------------------------------------------" << std::endl;
 		std::cout << "|          ID               Name               Quantity          Manufacturer           Type         |" << std::endl;
 		std::cout << "------------------------------------------------------------------------------------------------------" << std::endl;
 		selectData(dir);
 		goto loop_label;
-	case 2:
+	case ADD_ITEM:
 		std::cout << "Enter the item name: ";
 		std::getline(std::cin, name);
 
@@ -63,7 +71,7 @@ loop_label:
 
 		insertData(dir, name, quantity, manufacturer, type);
 		goto loop_label;
-	case 3:
+	case UPDATE_ITEM:
 		std::cout << "Enter the name of the item you are updating: ";
 		std::getline(std::cin, name);
 
@@ -72,12 +80,12 @@ loop_label:
 
 		updateData(dir, name, quantity);
 		goto loop_label;
-	case 4:
+	case DELETE_ITEM:
 		std::cout << "Enter the ID # of the item to delete: ";
 		std::cin >> id;
 		deleteData(dir, id);
 		goto loop_label;
-	case 5:
+	case QUIT:
 		break;
 	}
 

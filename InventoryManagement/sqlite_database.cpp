@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string>
 #include "sqlite_database.h"
+#include "InventoryItem.h"
 
 int createDB(const char* s) {
 	sqlite3* DB;

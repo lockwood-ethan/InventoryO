@@ -124,13 +124,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Downloads\sqlite-amalgamation-3500400\sqlite-amalgamation-3500400\sqlite3.c" />
+    <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sqlite_database.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="INVENTORY.db" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="sqlite_database.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
