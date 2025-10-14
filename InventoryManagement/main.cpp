@@ -11,6 +11,10 @@ const int UPDATE_ITEM = 3;
 const int DELETE_ITEM = 4;
 const int QUIT = 5;
 
+std::string requestName();
+int requestQuantity();
+std::string requestManufacturer();
+std::string requestType();
 
 int main() {
 	// Create database for storing inventory items
@@ -56,33 +60,22 @@ loop_label:
 		selectData(dir);
 		goto loop_label;
 	case ADD_ITEM:
-		std::cout << "Enter the item name: ";
-		std::getline(std::cin, name);
+		// Set InventoryItem properties and insert it into the database
+		inventoryItem.setName(requestName());
 
-		std::cout << "Enter the item quantity: ";
-		std::cin >> quantity;
-
+		inventoryItem.setQuantity(requestQuantity());
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-		std::cout << "Enter the manufacturer: ";
-		std::getline(std::cin, manufacturer);
+		inventoryItem.setManufacturer(requestManufacturer());
 
-		std::cout << "Enter the item type: ";
-		std::getline(std::cin, type);
-
-		inventoryItem.setName(name);
-		inventoryItem.setQuantity(quantity);
-		inventoryItem.setManufacturer(manufacturer);
-		inventoryItem.setType(type);
+		inventoryItem.setType(requestType());
 
 		insertData(dir, inventoryItem);
 		goto loop_label;
 	case UPDATE_ITEM:
-		std::cout << "Enter the name of the item you are updating: ";
-		std::getline(std::cin, name);
+		name = requestName();
 
-		std::cout << "Enter the new quantity of the item: ";
-		std::cin >> quantity;
+		quantity = requestQuantity();
 
 		updateData(dir, name, quantity);
 		goto loop_label;
@@ -96,4 +89,32 @@ loop_label:
 	}
 
 	return 0;
+}
+
+std::string requestName() {
+	std::string name;
+	std::cout << "Enter the item name: ";
+	std::getline(std::cin, name);
+	return name;
+}
+
+int requestQuantity() {
+	int quantity;
+	std::cout << "Enter the item quantity: ";
+	std::cin >> quantity;
+	return quantity;
+}
+
+std::string requestManufacturer() {
+	std::string manufacturer;
+	std::cout << "Enter the manufacturer: ";
+	std::getline(std::cin, manufacturer);
+	return manufacturer;
+}
+
+std::string requestType() {
+	std::string type;
+	std::cout << "Enter the item type: ";
+	std::getline(std::cin, type);
+	return type;
 }
