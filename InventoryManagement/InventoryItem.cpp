@@ -2,59 +2,59 @@
 #include <iostream>
 #include <string>
 
-class InventoryItem {
-public:
-	int id;
-	std::string name;
-	int quantity;
-	std::string manufacturer;
-	std::string type;
+InventoryItem::InventoryItem() {}
 
-	InventoryItem(int id, std::string name, int quantity, std::string manufacturer, std::string type) {
-		this->id = id;
-		this->name = name;
-		this->quantity = quantity;
-		this->manufacturer = manufacturer;
-		this->type = type;
+InventoryItem::InventoryItem(std::string name, int quantity, std::string manufacturer, std::string type) {
+	mName = name;
+	mQuantity = quantity;
+	mManufacturer = manufacturer;
+	mType = type;
+}
+
+InventoryItem::InventoryItem(int id, std::string name, int quantity, std::string manufacturer, std::string type) {
+	mId = id;
+	mName = name;
+	mQuantity = quantity;
+	mManufacturer = manufacturer;
+	mType = type;
+}
+
+	int InventoryItem::getId() {
+		return mId;
 	}
 
-	int getId() {
-		return this->id;
+	void InventoryItem::setId(int id) {
+		mId = id;
 	}
 
-	void setId(int id) {
-		this->id = id;
+	std::string InventoryItem::getName() {
+		return mName;
 	}
 
-	std::string getName() {
-		return this->name;
+	void InventoryItem::setName(std::string name) {
+		mName = name;
 	}
 
-	void setName(std::string name) {
-		this->name = name;
+	int InventoryItem::getQuantity() {
+		return mQuantity;
 	}
 
-	int getQuantity() {
-		return this->quantity;
+	void InventoryItem::setQuantity(int quantity) {
+		mQuantity = quantity;
 	}
 
-	void setQuantity(int quantity) {
-		this->quantity = quantity;
+	std::string InventoryItem::getManufacturer() {
+		return mManufacturer;
 	}
 
-	std::string getManufacturer() {
-		return this->manufacturer;
+	void InventoryItem::setManufacturer(std::string manufacturer) {
+		mManufacturer = manufacturer;
 	}
 
-	void setManufacturer(std::string manufacturer) {
-		this->manufacturer = manufacturer;
+	std::string InventoryItem::getType() {
+		return mType;
 	}
 
-	std::string getType() {
-		return this->type;
+	void InventoryItem::setType(std::string type) {
+		mType = type;
 	}
-
-	void setType(std::string type) {
-		this->type = type;
-	}
-};

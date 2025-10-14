@@ -49,13 +49,13 @@ int createTable(const char* s) {
 	return 0;
 }
 
-int insertData(const char* s, std::string name, int quantity, std::string manufacturer, std::string type) {
+int insertData(const char* s, InventoryItem inventoryItem) {
 	sqlite3* DB;
 	char* messageError;
 
 	int exit = sqlite3_open(s, &DB);
 
-	std::string sql = "INSERT INTO INVENTORY (NAME, QUANTITY, MANUFACTURER, TYPE) VALUES('" + name + "', '" + std::to_string(quantity) + "', '" + manufacturer + "', '" + type + "');";
+	std::string sql = "INSERT INTO INVENTORY (NAME, QUANTITY, MANUFACTURER, TYPE) VALUES('" + inventoryItem.getName() + "', '" + std::to_string(inventoryItem.getQuantity()) + "', '" + inventoryItem.getManufacturer() + "', '" + inventoryItem.getType() + "');";
 	
 	exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messageError);
 	if (exit != SQLITE_OK) {

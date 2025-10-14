@@ -27,6 +27,7 @@ int main() {
 	int quantity;
 	std::string manufacturer;
 	std::string type;
+	InventoryItem inventoryItem;
 
 	std::cout << "*****     Inventory Management System     *****" << std::endl;
 loop_label:
@@ -69,7 +70,12 @@ loop_label:
 		std::cout << "Enter the item type: ";
 		std::getline(std::cin, type);
 
-		insertData(dir, name, quantity, manufacturer, type);
+		inventoryItem.setName(name);
+		inventoryItem.setQuantity(quantity);
+		inventoryItem.setManufacturer(manufacturer);
+		inventoryItem.setType(type);
+
+		insertData(dir, inventoryItem);
 		goto loop_label;
 	case UPDATE_ITEM:
 		std::cout << "Enter the name of the item you are updating: ";

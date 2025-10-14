@@ -1,6 +1,18 @@
+#include <iostream>
+#include <string>
 #pragma once
 
 class InventoryItem {
+private:
+	int mId;
+	std::string mName;
+	int mQuantity;
+	std::string mManufacturer;
+	std::string mType;
+public:
+	InventoryItem();
+	InventoryItem(std::string name, int quantity, std::string manufacturer, std::string type);
+	InventoryItem(int id, std::string name, int quantity, std::string manufacturer, std::string type);
 	int getId();
 	void setId(int id);
 	std::string getName();
