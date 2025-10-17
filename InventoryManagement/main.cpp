@@ -15,6 +15,7 @@ std::string requestName();
 int requestQuantity();
 std::string requestManufacturer();
 std::string requestType();
+int displayMenuOptions();
 
 int main() {
 	// Create database for storing inventory items
@@ -25,7 +26,6 @@ int main() {
 	createTable(dir);
 
 	// Main UI
-	int choice;
 	int id;
 	std::string name;
 	int quantity;
@@ -35,18 +35,7 @@ int main() {
 
 	std::cout << "*****     Inventory Management System     *****" << std::endl;
 loop_label:
-	std::cout << std::endl;
-	std::cin.clear();
-	do {
-		std::cout << "1. Display inventory" << std::endl;
-		std::cout << "2. Add a new item to inventory" << std::endl;
-		std::cout << "3. Update quantity of existing inventory item" << std::endl;
-		std::cout << "4. Delete item from inventory" << std::endl;
-		std::cout << "5. Quit" << std::endl;
-		std::cout << "Choose an option: ";
-		std::cin >> choice;
-		std::cout << std::endl;
-	} while (choice < 1 && choice > 5);
+	int choice = displayMenuOptions();
 
 	std::cin.clear();
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -117,4 +106,21 @@ std::string requestType() {
 	std::cout << "Enter the item type: ";
 	std::getline(std::cin, type);
 	return type;
+}
+
+int displayMenuOptions() {
+	int choice;
+	std::cout << std::endl;
+	std::cin.clear();
+	do {
+		std::cout << "1. Display inventory" << std::endl;
+		std::cout << "2. Add a new item to inventory" << std::endl;
+		std::cout << "3. Update quantity of existing inventory item" << std::endl;
+		std::cout << "4. Delete item from inventory" << std::endl;
+		std::cout << "5. Quit" << std::endl;
+		std::cout << "Choose an option: ";
+		std::cin >> choice;
+		std::cout << std::endl;
+	} while (choice < 1 && choice > 5);
+	return choice;
 }

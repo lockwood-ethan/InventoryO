@@ -101,12 +101,19 @@ int selectData(const char* s) {
 
 int deleteData(const char* s, int id) {
 	sqlite3* DB;
+	char* messageError;
 
 	int exit = sqlite3_open(s, &DB);
 
 	std::string sql = "DELETE FROM INVENTORY WHERE ID='" + std::to_string(id) + "';";
-	sqlite3_exec(DB, sql.c_str(), callback, NULL, NULL);
-
+	exit = sqlite3_exec(DB, sql.c_str(), callback, NULL, &messageError);
+	if (exit != SQLITE_OK) {
+		std::cerr << "Error Deleting Item" << std::endl;
+		sqlite3_free(messageError);
+	}
+	else {
+		std::cout << "Item Deleted Successfully!" << std::endl;
+	}
 	return 0;
 }
 
@@ -124,3 +131,5 @@ int callback(void* NotUsed, int argc, char** argv, char** azColName) {
 
 	return 0;
 }
+
+
