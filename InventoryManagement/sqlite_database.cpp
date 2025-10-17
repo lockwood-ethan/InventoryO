@@ -69,26 +69,26 @@ int insertData(const char* s, InventoryItem inventoryItem) {
 	return 0;
 }
 
-int updateData(const char* s, std::string name, int quantity) {
-	sqlite3* DB;
+int updateData(const char* s, int id, int quantity) {
+	/*sqlite3* DB;
 	char* messageError;
 
 	int exit = sqlite3_open(s, &DB);
 
-	std::string sql = "UPDATE INVENTORY SET QUANTITY = '" + std::to_string(quantity) + "' WHERE NAME = '" + name + "';";
+	std::string sql = "UPDATE INVENTORY SET QUANTITY = '" + std::to_string(quantity) + "' WHERE ID = '" + std::to_string(id) + "';";
 
 	exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messageError);
 	if (exit != SQLITE_OK) {
-		std::cerr << "Error Updating Quantity" << std::endl;
+		std::cerr << "Error Updating Item" << std::endl;
 		sqlite3_free(messageError);
 	}
 	else {
-		std::cout << name << " Updated Successfully!" << std::endl;
-	}
+		std::cout << "Item Updated Successfully!" << std::endl;
+	}*/
 	return 0;
 }
 
-int selectData(const char* s) {
+int displayData(const char* s) {
 	sqlite3* DB;
 
 	int exit = sqlite3_open(s, &DB);
@@ -114,6 +114,25 @@ int deleteData(const char* s, int id) {
 	else {
 		std::cout << "Item Deleted Successfully!" << std::endl;
 	}
+	return 0;
+}
+
+int searchData(const char* s, std::string name) {
+	sqlite3* DB;
+	char* messageError;
+
+	int exit = sqlite3_open(s, &DB);
+
+	std::string sql = "SELECT * FROM INVENTORY WHERE NAME='" + name + "';";
+	exit = sqlite3_exec(DB, sql.c_str(), callback, NULL, &messageError);
+	if (exit != SQLITE_OK) {
+		std::cerr << "Item Not Found" << std::endl;
+		sqlite3_free(messageError);
+	}
+	else {
+		std::cout << "Item Found!" << std::endl;
+	}
+
 	return 0;
 }
 

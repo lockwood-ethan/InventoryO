@@ -6,16 +6,20 @@
 #include "InventoryItem.h"
 
 const int DISPLAY = 1;
-const int ADD_ITEM = 2;
-const int UPDATE_ITEM = 3;
-const int DELETE_ITEM = 4;
-const int QUIT = 5;
+const int SEARCH = 2;
+const int ADD_ITEM = 3;
+const int UPDATE_ITEM = 4;
+const int DELETE_ITEM = 5;
+const int QUIT = 6;
 
+int requestId();
 std::string requestName();
 int requestQuantity();
 std::string requestManufacturer();
 std::string requestType();
 int displayMenuOptions();
+int displayUpdateOptions();
+void displaySearchHeader();
 
 int main() {
 	// Create database for storing inventory items
@@ -27,11 +31,14 @@ int main() {
 
 	// Main UI
 	int id;
+	std::string searchName;
 	std::string name;
 	int quantity;
 	std::string manufacturer;
 	std::string type;
 	InventoryItem inventoryItem;
+	int updateChoice;
+	int updateId;
 
 	std::cout << "*****     Inventory Management System     *****" << std::endl;
 loop_label:
@@ -43,10 +50,13 @@ loop_label:
 	// Create, Read, Update, Delete inventory items
 	switch (choice) {
 	case DISPLAY:
-		std::cout << "------------------------------------------------------------------------------------------------------" << std::endl;
-		std::cout << "|          ID               Name               Quantity          Manufacturer           Type         |" << std::endl;
-		std::cout << "------------------------------------------------------------------------------------------------------" << std::endl;
-		selectData(dir);
+		displaySearchHeader();
+		displayData(dir);
+		goto loop_label;
+	case SEARCH:
+		searchName = requestName();
+		displaySearchHeader();
+		searchData(dir, searchName);
 		goto loop_label;
 	case ADD_ITEM:
 		// Set InventoryItem properties and insert it into the database
@@ -62,11 +72,9 @@ loop_label:
 		insertData(dir, inventoryItem);
 		goto loop_label;
 	case UPDATE_ITEM:
-		name = requestName();
+		updateId = requestId();
+		updateChoice = displayUpdateOptions();
 
-		quantity = requestQuantity();
-
-		updateData(dir, name, quantity);
 		goto loop_label;
 	case DELETE_ITEM:
 		std::cout << "Enter the ID # of the item to delete: ";
@@ -78,6 +86,13 @@ loop_label:
 	}
 
 	return 0;
+}
+
+int requestId() {
+	int id;
+	std::cout << "Enter the item ID: ";
+	std::cin >> id;
+	return id;
 }
 
 std::string requestName() {
@@ -114,13 +129,37 @@ int displayMenuOptions() {
 	std::cin.clear();
 	do {
 		std::cout << "1. Display inventory" << std::endl;
-		std::cout << "2. Add a new item to inventory" << std::endl;
-		std::cout << "3. Update quantity of existing inventory item" << std::endl;
-		std::cout << "4. Delete item from inventory" << std::endl;
+		std::cout << "2. Search inventory" << std::endl;
+		std::cout << "3. Add a new item to inventory" << std::endl;
+		std::cout << "4. Update quantity of existing inventory item" << std::endl;
+		std::cout << "5. Delete item from inventory" << std::endl;
+		std::cout << "6. Quit" << std::endl;
+		std::cout << "Choose an option: ";
+		std::cin >> choice;
+		std::cout << std::endl;
+	} while (choice < 1 && choice > 6);
+	return choice;
+}
+
+int displayUpdateOptions() {
+	int choice;
+	std::cout << std::endl;
+	std::cin.clear();
+	do {
+		std::cout << "1. Update Name" << std::endl;
+		std::cout << "2. Update Quantity" << std::endl;
+		std::cout << "3. Update Manufacturer" << std::endl;
+		std::cout << "4. Update Type" << std::endl;
 		std::cout << "5. Quit" << std::endl;
 		std::cout << "Choose an option: ";
 		std::cin >> choice;
 		std::cout << std::endl;
 	} while (choice < 1 && choice > 5);
 	return choice;
+}
+
+void displaySearchHeader() {
+	std::cout << "------------------------------------------------------------------------------------------------------" << std::endl;
+	std::cout << "|          ID               Name               Quantity          Manufacturer           Type         |" << std::endl;
+	std::cout << "------------------------------------------------------------------------------------------------------" << std::endl;
 }
