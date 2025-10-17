@@ -39,6 +39,8 @@ int main() {
 	InventoryItem inventoryItem;
 	int updateChoice;
 	int updateId;
+	std::string property;
+	std::string value;
 
 	std::cout << "*****     Inventory Management System     *****" << std::endl;
 loop_label:
@@ -74,7 +76,27 @@ loop_label:
 	case UPDATE_ITEM:
 		updateId = requestId();
 		updateChoice = displayUpdateOptions();
-
+		if (updateChoice == 1) {
+			property = "NAME";
+			value = requestName();
+		}
+		else if (updateChoice == 2) {
+			property = "QUANTITY";
+			value = std::to_string(requestQuantity());
+		}
+		else if (updateChoice == 3) {
+			property = "MANUFACTURER";
+			value = requestManufacturer();
+		}
+		else if (updateChoice == 4) {
+			property = "TYPE";
+			value = requestType();
+		}
+		else if (updateChoice == 5) {
+			goto loop_label;
+		}
+		std::cout << property << " " << value << std::endl;
+		updateData(dir, updateId, property, value);
 		goto loop_label;
 	case DELETE_ITEM:
 		std::cout << "Enter the ID # of the item to delete: ";
@@ -97,8 +119,10 @@ int requestId() {
 
 std::string requestName() {
 	std::string name;
-	std::cout << "Enter the item name: ";
-	std::getline(std::cin, name);
+	do {
+		std::cout << "Enter the item name: ";
+		std::getline(std::cin, name);
+	} while (name.length() > 20);
 	return name;
 }
 
@@ -111,15 +135,19 @@ int requestQuantity() {
 
 std::string requestManufacturer() {
 	std::string manufacturer;
-	std::cout << "Enter the manufacturer: ";
-	std::getline(std::cin, manufacturer);
+	do {
+		std::cout << "Enter the manufacturer: ";
+		std::getline(std::cin, manufacturer);
+	} while (manufacturer.length() > 20);
 	return manufacturer;
 }
 
 std::string requestType() {
 	std::string type;
-	std::cout << "Enter the item type: ";
-	std::getline(std::cin, type);
+	do {
+		std::cout << "Enter the item type: ";
+		std::getline(std::cin, type);
+	} while (type.length() > 20);
 	return type;
 }
 
@@ -131,7 +159,7 @@ int displayMenuOptions() {
 		std::cout << "1. Display inventory" << std::endl;
 		std::cout << "2. Search inventory" << std::endl;
 		std::cout << "3. Add a new item to inventory" << std::endl;
-		std::cout << "4. Update quantity of existing inventory item" << std::endl;
+		std::cout << "4. Update existing inventory item" << std::endl;
 		std::cout << "5. Delete item from inventory" << std::endl;
 		std::cout << "6. Quit" << std::endl;
 		std::cout << "Choose an option: ";
@@ -155,6 +183,7 @@ int displayUpdateOptions() {
 		std::cin >> choice;
 		std::cout << std::endl;
 	} while (choice < 1 && choice > 5);
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	return choice;
 }
 

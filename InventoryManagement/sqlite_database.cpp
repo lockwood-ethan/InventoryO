@@ -69,13 +69,13 @@ int insertData(const char* s, InventoryItem inventoryItem) {
 	return 0;
 }
 
-int updateData(const char* s, int id, int quantity) {
-	/*sqlite3* DB;
+int updateData(const char* s, int id, std::string property, std::string value) {
+	sqlite3* DB;
 	char* messageError;
 
 	int exit = sqlite3_open(s, &DB);
 
-	std::string sql = "UPDATE INVENTORY SET QUANTITY = '" + std::to_string(quantity) + "' WHERE ID = '" + std::to_string(id) + "';";
+	std::string sql = "UPDATE INVENTORY SET " + property + " = '" + value + "' WHERE ID = '" + std::to_string(id) + "'; ";
 
 	exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messageError);
 	if (exit != SQLITE_OK) {
@@ -84,7 +84,7 @@ int updateData(const char* s, int id, int quantity) {
 	}
 	else {
 		std::cout << "Item Updated Successfully!" << std::endl;
-	}*/
+	}
 	return 0;
 }
 

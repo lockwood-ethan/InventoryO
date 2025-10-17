@@ -129,7 +129,6 @@
     <ClCompile Include="sqlite_database.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="INVENTORY.db" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
