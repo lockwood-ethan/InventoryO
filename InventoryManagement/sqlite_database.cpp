@@ -1,4 +1,6 @@
 #include <sqlite3.h>
+#include <cstring>
+#include <cmath>
 #include <iostream>
 #include <stdio.h>
 #include <string>
