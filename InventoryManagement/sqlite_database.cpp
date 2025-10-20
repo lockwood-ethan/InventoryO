@@ -131,9 +131,6 @@ int searchData(const char* s, std::string name) {
 		std::cerr << "Item Not Found" << std::endl;
 		sqlite3_free(messageError);
 	}
-	else {
-		std::cout << "Item Found!" << std::endl;
-	}
 
 	return 0;
 }
